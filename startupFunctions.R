@@ -26,6 +26,7 @@ synPut <- function(object, parentId = NULL){
     cat(sprintf('Storing %s\n', entName))
     synEnt <- storeEntity(synEnt)
     cat(sprintf('Completed creation and storage of %s\n', entName))
+    return(synEnt)
   }
 }
 
