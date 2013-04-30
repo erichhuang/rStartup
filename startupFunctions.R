@@ -64,7 +64,29 @@ generatedByList <- function(entityList, activity){
     cat(sprintf('Defining provenance for File %s\n', i))
     iEnt <- entityList[[i]]
     generatedBy(iEnt) <- activity
-    iEnt <- storeEntity(iEnt)
+    iEnt <- updateEntity(iEnt)
   }
 }
+
+# # A function to read TCGA PanCancer files into memory
+# readToWorkspace <- function(synapseEntity){
+#   
+#   # Apparently, with these entities the cacheDir depth is one 
+#   # directory too deep, hence
+#   cachePath <- synapseEntity$cacheDir
+#   pathElements <- strsplit(cachePath, '/')
+#   pathLength <- length(pathElements[[1]]) - 1
+#   newPathElements <- pathElements[[1]][1:pathLength]
+#   filePath <- paste(newPathElements, collapse = '/')
+#   fullFilePath <- list.files(filePath, full.names = T)
+#   excludeVec <- rep(NA, 2)
+#   excludeVec[1] <- grep('files.json', fullFilePath)
+#   excludeVec[2] <- grep('_unpacked', fullFilePath)
+#   fullFilePath <- fullFilePath[-excludeVec]
+#   
+#   # read the first column for rownames
+#   rowNames <- read.table(pipe(paste('cut -f1 ', fullFilePath, sep = '')))
+#   colNames <- read.table(pipe(paste('head -1 ', fullFilePath, sep = '')))
+#   strippedTable <- read.table(fullFilePath)
+# }
 
